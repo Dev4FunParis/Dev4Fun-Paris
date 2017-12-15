@@ -1,37 +1,79 @@
-## Welcome to GitHub Pages
+Dev4FunParis
+============
 
-You can use the [editor on GitHub](https://github.com/Dev4FunParis/meetup/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+Dev4FunParis est un [meetup](https://www.meetup.com/fr-FR/Dev4Fun-Paris/) mensuel qui chercher à rassembler les développeurs dans une ambiance convivial. Le but est d'apprendre et d'échanger sur nos méthodes de développement tout en s'amusant. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Nous utilisons souvent la plateforme Codingame pour animer nos soirées :-) !
 
-### Markdown
+Date du prochain meetup : `mi-Janvier`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+[2017-12-13] Dev4Fun #28
+------------------------
 
-```markdown
-Syntax highlighted code block
+Le Dev4fun 28 à eu lieu chez [Adneom](https://www.adneom.com/fr)
+### Programme de la soirée : 
 
-# Header 1
-## Header 2
-### Header 3
+#### Suite de Conway
+Sorciers du code, choisissez votre langage et vos compagnons pour affronter la « SUITE DE CONWAY » sur les terres de Codingame.
+[énoncé](https://www.codingame.com/training/medium/conway-sequence)
 
-- Bulleted
-- List
+notre solution en groovy : 
 
-1. Numbered
-2. List
+```groovy
+input = new Scanner(System.in);
 
-**Bold** and _Italic_ and `Code` text
+r = input.nextInt()
+l = input.nextInt()
 
-[Link](url) and ![Image](src)
+c = [[r],[1,r]]
+(2..l-1).each {
+    List list = c[it - 1]
+    result = []
+    i = 1
+    while (i <= list.size()) {
+        count = 1
+        while (list[i - 1] == list[i]) {
+            count++
+            i++
+        }
+        result.add(count)
+        result.add(list[i - 1])
+        count = 1
+        i++
+    }
+    c.add(result)
+}
+println(c[l-1].join(" "))
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### Hackerland radio transmitters
+Dans les tunnels d’Hackerrank, la cité Hackerland à besoin d’ingénieurs pour rétablir leur système de communication.
+[énoncé](https://www.hackerrank.com/challenges/hackerland-radio-transmitters/problem)
 
-### Jekyll Themes
+notre solution en groovy : 
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Dev4FunParis/meetup/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```groovy
+s= new Scanner(System.in);
+int n = s.nextInt();
+int portee = s.nextInt();
+maisons=new TreeSet<>()
+for(int x_i=0; x_i < n; x_i++){
+    maisons.add(s.nextInt())
+}
 
-### Support or Contact
+min = maisons.min()
+max = maisons.max()
+transmiters=[]
+for(i = min; i <= max; i++) {
+    if (maisons.contains(i)) {
+        k = i + portee
+        while (!maisons.contains(k)) {
+            k--
+        }
+        transmiters.add(k)
+        i = k + portee
+    }
+}
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+println(transmiters.size())
+```
