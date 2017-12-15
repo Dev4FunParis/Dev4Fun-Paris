@@ -12,7 +12,7 @@ Date du prochain meetup : `mi-Janvier`
 
 Le Dev4fun 28 à eu lieu chez [Adneom](https://www.adneom.com/fr)
 
-<p align="center"><img src="dev4fun_28/dev4fun28-1.jpg" width="300">   <img src="dev4fun_28/dev4fun28-2.jpg" width="300"></p>
+<p align="center"><img src="dev4fun_28/dev4fun28-1.jpg" width="275">   <img src="dev4fun_28/dev4fun28-2.jpg" width="275"></p>
 
 
 ### Programme de la soirée : 
