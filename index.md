@@ -1,7 +1,7 @@
 Le Meetup
 ============
 
-Dev4FunParis est un [meetup](https://www.meetup.com/fr-FR/Dev4Fun-Paris/) mensuel qui chercher à rassembler les développeurs dans une ambiance convivial. Le but est d'apprendre et d'échanger sur nos méthodes de développement tout en s'amusant. 
+Dev4FunParis est un [meetup](https://www.meetup.com/fr-FR/Dev4Fun-Paris/) mensuel qui chercher à rassembler les développeurs dans une ambiance conviviale. Le but est d'apprendre et d'échanger sur nos méthodes de développement tout en s'amusant. 
 
 Nous utilisons souvent la plateforme Codingame pour animer nos soirées :-) !
 
