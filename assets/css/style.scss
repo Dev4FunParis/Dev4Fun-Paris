@@ -29,3 +29,11 @@ section #title .credits.right {
 header h1, h1, h2, h3, h4, h5, h6 {
     color: #53e8d6;
 }
+
+header {
+    border-bottom: 1px solid #53e8d6;
+}
+
+header h1:before {   
+    display: none;
+}
