@@ -1,5 +1,5 @@
 title: Dev4Fun Paris
-description: La page du meetup Dev4Fun Paris
+description: La page du meetup <a href="https://www.meetup.com/fr-FR/Dev4Fun-Paris/">Dev4Fun Paris</a>
 show_downloads: false
-google_analytics:
+google_analytics: UA-112475980-1
 theme: jekyll-theme-hacker
