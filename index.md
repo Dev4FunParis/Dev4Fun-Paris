@@ -12,7 +12,7 @@ Date du prochain meetup : `le 21 Février`
 
 Le Dev4fun 29 à eu lieu chez [Adneom](https://www.adneom.com/fr)
 
-<p align="center"><img src="dev4fun_29/dev4fun29.jpg" width="275"></p>
+<p align="center"><img src="dev4fun_29/dev4fun29.jpg" width="500"></p>
 
 ### Programme de la soirée :
 
