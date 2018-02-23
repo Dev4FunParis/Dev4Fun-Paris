@@ -5,12 +5,222 @@ Dev4FunParis est un [meetup](https://www.meetup.com/fr-FR/Dev4Fun-Paris/) mensue
 
 Nous utilisons souvent la plateforme Codingame pour animer nos soirées :-) !
 
-Date du prochain meetup : `le 21 Février`
+Date du prochain meetup : `le 14 Mars`
+
+[2018-01-17] Dev4Fun #30
+----------------------
+
+Le Dev4fun 30 a eu lieu chez [Adneom](https://www.adneom.com/fr)
+
+### Programme de la soirée : 
+
+#### La dernière croisade
+Un croisé, Indiana fils du Baron de Codingame s’est perdu dans un labyrinthe , une belle récompense sera offerte à ceux qui le ramènerons à bon port . [Énoncé](https://www.codingame.com/training/medium/the-last-crusade-episode-1)
+
+notre solution en java : 
+
+```java
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import java.awt.Point;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Player {
+
+    private static int[][] parseLines(List<String> lines) {
+        int[][] grid = new int[lines.size()][];
+        for (int i = 0; i < grid.length; i++) {
+            String[] values = lines.get(i).split(" ");
+            grid[i] = new int[values.length];
+            for (int j = 0; j < values.length; j++) {
+                grid[i][j] = Integer.parseInt(values[j]);
+            }
+        }
+        return grid;
+    }
+
+    interface Trajectory {
+        Point nextCell(Point cell);
+    }
+
+    static class Down implements Trajectory{
+        public Point nextCell(Point entry) {
+            return new Point(entry.x,entry.y+1);
+        }
+    }
+
+    private static class Left implements Trajectory {
+        public Point nextCell(Point cell) {
+            return new Point(cell.x-1,cell.y);
+        }
+    }
+
+    private static class Right implements Trajectory {
+        public Point nextCell(Point cell) {
+            return new Point(cell.x+1,cell.y);
+        }
+    }
+
+    static class Cell {
+
+        private final Trajectory top;
+        private final Trajectory right;
+        private final Trajectory left;
+
+        public Cell(Trajectory top, Trajectory right, Trajectory left) {
+            this.top = top;
+            this.right = right;
+            this.left = left;
+        }
+
+        private Point fromTop(Point entry) {
+            return top.nextCell(entry);
+        }
+
+        private Point fromRight(Point entry) {
+            return right.nextCell(entry);
+        }
+
+        private Point fromLeft(Point entry) {
+            return left.nextCell(entry);
+        }
+
+        public Point nextCell(Point entry, String direction) {
+            if("TOP".equals(direction))
+                return fromTop(entry);
+            if("RIGHT".equals(direction))
+                return fromRight(entry);
+            if("LEFT".equals(direction))
+                return fromLeft(entry);
+            return null;
+        }
+    }
+
+    static final Trajectory DOWN = new Down();
+    static final Trajectory LEFT = new Left();
+    static final Trajectory RIGHT = new Right();
+    static final Trajectory NONE = null;
+    static final Cell[] CELLS_TYPES = new Cell[] {
+        new Cell(DOWN,DOWN,DOWN),
+        new Cell(NONE,LEFT,RIGHT),
+        new Cell(DOWN,NONE,NONE),
+        new Cell(LEFT,DOWN,NONE),
+        new Cell(RIGHT,NONE,DOWN),
+        new Cell(NONE,LEFT,RIGHT),
+        new Cell(DOWN,DOWN,NONE),
+        new Cell(NONE,DOWN,DOWN),
+        new Cell(DOWN,NONE,DOWN),
+        new Cell(LEFT,NONE,NONE),
+        new Cell(RIGHT,NONE,NONE),
+        new Cell(NONE,DOWN,NONE),
+        new Cell(NONE,NONE,DOWN)
+    };
+
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        int W = in.nextInt(); // number of columns.
+        int H = in.nextInt(); // number of rows.
+        if (in.hasNextLine()) {
+            in.nextLine();
+        }
+        List<String> lines = new ArrayList<String>();
+        for (int i = 0; i < H; i++) {
+            String LINE = in.nextLine(); // represents a line in the grid and contains W integers. Each integer represents one room of a given type.
+            lines.add(LINE);
+        }
+        int EX = in.nextInt(); // the coordinate along the X axis of the exit (not useful for this first mission, but must be read).
+        int[][] grid = parseLines(lines);
+        // game loop
+        while (true) {
+            int XI = in.nextInt();
+            int YI = in.nextInt();
+            String POS = in.next();
+            Point start = new Point(XI,YI);
+            // Write an action using System.out.println()
+            // To debug: System.err.println("Debug messages...");
+            int type = grid[start.y][start.x];
+            if(type != 0) {
+                Point nextCell = CELLS_TYPES[type-1].nextCell(start, POS);
+                System.out.println(String.format("%d %d",nextCell.x, nextCell.y));
+            } 
+            // One line containing the X Y coordinates of the room in which you believe Indy will be on the next turn.
+            
+        }
+    }
+}
+```
+
+#### Le jeu des piles
+Dans une taverne proche d’Hackerrank, Alexa défit les aventuriers un peu naïfs avec un jeu, venez lui donner une bonne leçon en la défiant !
+[Énoncé](https://www.hackerrank.com/challenges/game-of-two-stacks/problem)
+
+
+notre début solution en java : 
+
+```java
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
+public class GameOf2StackTest {
+
+    public static int stackGame(int x, int[] a, int[] b) {
+        int[] aMax = new int[a.length + 1];
+        aMax[0] = 0;
+        for (int i = 0; i < a.length; i++) {
+            aMax[i + 1] = a[i] + aMax[i];
+        }
+        int[] bMax = new int[b.length + 1];
+        bMax[0] = 0;
+        for (int i = 0; i < b.length; i++) {
+            bMax[i + 1] = b[i] + bMax[i];
+        }
+        int max = 0;
+        for (int i = 0; i < aMax.length; i++) {
+            if (aMax[i] < x) {
+                for (int j = 0; j < bMax.length; j++) {
+                    if (aMax[i] + bMax[j] < x) {
+                        if (i + j > max) {
+                            max = i + j;
+                        }
+                    } else {
+                        break;
+                    }
+
+                }
+            } else return max;
+        }
+        return max;
+    }
+    
+    @Test
+    public void stackGame_simple_game() {
+        int[] a = new int[]{4, 2, 4, 6, 1};
+        int[] b = new int[]{2, 1, 8, 5};
+        int x = 10;
+        assertEquals(4, stackGame(x, a, b));
+    }
+
+    @Test
+    public void stackGame_vicious_game() {
+        int[] a = new int[]{4, 1, 1, 1, 1};
+        int[] b = new int[]{2, 3, 3, 5};
+        int x = 8;
+        assertEquals(4, stackGame(x, a, b));
+    }
+
+}
+```
 
 [2018-01-17] Dev4Fun #29
 ----------------------
 
-Le Dev4fun 29 à eu lieu chez [Adneom](https://www.adneom.com/fr)
+Le Dev4fun 29 a eu lieu chez [Adneom](https://www.adneom.com/fr)
 
 <p align="center"><img src="dev4fun_29/dev4fun29.jpg" width="500"></p>
 
@@ -212,7 +422,7 @@ public class GridTest {
 [2017-12-13] Dev4Fun #28
 ------------------------
 
-Le Dev4fun 28 à eu lieu chez [Adneom](https://www.adneom.com/fr)
+Le Dev4fun 28 a eu lieu chez [Adneom](https://www.adneom.com/fr)
 
 <p align="center"><img src="dev4fun_28/dev4fun28-1.jpg" width="275">   <img src="dev4fun_28/dev4fun28-2.jpg" width="275"></p>
 
